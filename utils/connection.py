@@ -4,6 +4,7 @@ import motor.motor_asyncio
 from setting import MONGO_DB
 import os
 import json
+import certifi
 
 def get_conn():
     scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive"]
@@ -17,6 +18,6 @@ def get_conn():
     return sheet
 
 def get_db():
-    client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DB)
+    client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DB,tlsCAFile=certifi.where())
     db = client.Company
     return db

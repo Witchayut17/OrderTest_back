@@ -2,11 +2,14 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import motor.motor_asyncio
 from setting import MONGO_DB
+import json
 
 def get_conn():
     scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive"]
 
-    cred = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+    creds_json = os.getenv("credentials")
+    creds_dict = json.loads(creds_json)
+    cred = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     client = gspread.authorize(cred)
     spreadsheet = client.open("TestPandas")
     sheet = spreadsheet.sheet1

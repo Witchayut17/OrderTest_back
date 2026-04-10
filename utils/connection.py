@@ -2,6 +2,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import motor.motor_asyncio
 from setting import MONGO_DB
+import os
 import json
 
 def get_conn():
